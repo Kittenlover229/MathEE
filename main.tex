@@ -1,0 +1,47 @@
+\documentclass[14pt]{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{lipsum}
+\usepackage{layout}
+\usepackage{blindtext}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\pagestyle{fancy}
+\title{\textbf{Applications Of Linear Algebra In Language Processing: Developing A Dictionary Model As A Solution To The Tip-Of-Tongue Problem}}
+\author{Artur Roos}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+\begin{multicols}{2}
+\section{Introduction}
+\subsection{Rationale}
+\lipsum[1-6]
+\subsection{Aim}
+\lipsum[1-6]
+\section{Investigation}
+\subsection{Problem Overview}
+That problem can be solved using a language model, essentially a multivariable mathematical function, which outputs a probability of a certain word occuring in a certain context.
+\lipsum[1-6]
+\subsection{Words As Vectors}
+Encoding everything in terms of characters in useless, better encode the words.
+One hot encoding is great for other types of data, not for words. Word embeddings\cite{robmiles-embeddings}!
+\subsection{Context-awareness}
+\lipsum[1-6]
+\subsection{Data Processing}
+\lipsum[1-6]
+\section{Reflection}
+Which biases does this encorporate? The dictionary biases, cuz I used their dataset.
+
+The transformer appears to have knowledge about the world because it understands language.
+
+\lipsum[2]
+\section{Conclusion}
+Glad I did it with \LaTeXe\cite{latex2e}, will continue using it.
+\end{multicols}
+
+\bibliographystyle{plain}
+\bibliography{sources}
+\end{document}
