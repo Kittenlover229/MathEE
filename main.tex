@@ -1,4 +1,4 @@
-\documentclass[14pt]{article}
+\documentclass{article}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{lipsum}
 \usepackage{layout}
@@ -6,15 +6,36 @@
 \usepackage{multicol}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{mwe}
 
 \pagestyle{fancy}
 \title{\textbf{Applications Of Linear Algebra In Language Processing: Developing A Dictionary Model As A Solution To The Tip-Of-Tongue Problem}}
 \author{Artur Roos}
 
 \begin{document}
-\maketitle
-\tableofcontents
+\begin{titlepage}
+	\centering
+	\includegraphics[width=0.15\textwidth]{dp-programme-logo}\par\vspace{1cm}
+	{\textsc{Joensuun Lyseon Lukio} \par}
+	\vspace{1cm}
+	{\Large \textsc{``Mathematics: Analysis And Approaches" Extended Essay}\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Applications Of Linear Algebra In Language Processing: Developing A Dictionary Model As A Solution To The Tip-Of-Tongue Problem\par}
+	\vspace{2cm}
+	{\Large\itshape Artur Roos\par}
+	\vfill
+	supervised by\par
+	Eskelinen Tanja
+	\vfill
+	{\large \today\par}
+\end{titlepage}
+
 \clearpage
+\pagenumbering{arabic}
+\tableofcontents
+\vspace{48pt}
+
 \begin{multicols}{2}
 \section{Introduction}
 \subsection{Rationale}
@@ -28,7 +49,7 @@ That problem can be solved using a language model, essentially a multivariable m
 \subsection{Words As Vectors}
 Encoding everything in terms of characters in useless, better encode the words.
 One hot encoding is great for other types of data, not for words. Word embeddings\cite{robmiles-embeddings}!
-\subsection{Context-awareness}
+\subsection{Attention Retention}
 \lipsum[1-6]
 \subsection{Data Processing}
 \lipsum[1-6]
@@ -42,6 +63,7 @@ The transformer appears to have knowledge about the world because it understands
 Glad I did it with \LaTeXe\cite{latex2e}, will continue using it.
 \end{multicols}
 
+\clearpage
 \bibliographystyle{plain}
 \bibliography{sources}
 \end{document}
