@@ -1,5 +1,8 @@
-\documentclass{article}
+\documentclass[12pt]{article}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{witharrows}
 \usepackage{lipsum}
 \usepackage{layout}
 \usepackage{blindtext}
@@ -7,7 +10,10 @@
 \usepackage{fancyhdr}
 \usepackage{hyperref}
 \usepackage{natbib}
+\usepackage{indentfirst}
 \usepackage{mwe}
+\usepackage{epigraph}
+\usepackage{parskip}
 
 \begin{document}
 \begin{titlepage}
@@ -17,9 +23,9 @@
 	\vspace{1cm}
 	{\Large \textsc{``Mathematics: Analysis And Approaches" Extended Essay}\par}
 	\vspace{1.5cm}
-	{\huge\bfseries Applications Of Linear Algebra In Language Processing: Developing A Dictionary Model As A Solution To The Tip-Of-Tongue Problem\par}
+	{\huge\bfseries Finding an Analytical Continious 2D Curve of Pursuit in a Partially Restricted System\par}
 	\vspace{2cm}
-	{\Large\itshape Artur Roos\par}
+	{\Large\itshape by Artur Roos\par}
 	\vfill
 	supervised by\par
 	Eskelinen Tanja
@@ -32,32 +38,60 @@
 \tableofcontents
 \vspace{48pt}
 
-\begin{multicols}{2}
 \section{Introduction}
-\subsection{Rationale}
-\lipsum[1-6]
-\subsection{Aim}
-\lipsum[1-6]
+\subsection{Personal Engagement}
+\epigraph{Wow, this one is a lot more difficult than I thought it would be...}{\textit{My Nephew}}
+I always found childish math problems the most engaging. The ones that you could give to your clever nephew or niece over dinner to make them obsessed over something that is essentially a maths puzzle in disguise. Most inventive of them even trick you with their down to earth question, avoiding saying ``integral" or ``complex''. One of those problems bugged me for a while and I recognized an opportunity to solve it.
+
 \section{Investigation}
 \subsection{Problem Overview}
-That problem can be solved using a language model, essentially a multivariable mathematical function, which outputs a probability of a certain word occuring in a certain context.
-\lipsum[1-6]
-\subsection{Words As Vectors}
-Encoding everything in terms of characters in useless, better encode the words.
-One hot encoding is great for other types of data, not for words. Word embeddings\cite{robmiles-embeddings}!
-\subsection{Attention Retention}
-\lipsum[1-6]
-\subsection{Data Processing}
-\lipsum[1-6]
-\section{Reflection}
-Which biases does this encorporate? The dictionary biases, cuz I used their dataset.
 
-The transformer appears to have knowledge about the world because it understands language.
+There are several versions of the problem with different species chasing eachother around, but alas I couldn't find the work the problem first appeared in, so I am going to use my prefered variation. The premise and numerical values stay the same across interpretations.
 
-\lipsum[2]
+\newpage
+\emph{Imagine a swan in a middle of a perfectly circular unit lake. Standing on the edge is a hungry cat. The cat is after the swan and the swan's goal is to escape. The best route is flight, and yet it can only take off from land. The cat on land is 4 times faster than the swan on water. Can the mouse escape the cat and if yes, what trajectory does it need to follow?}
+
+We need to formalize the problem. It can be represented using the following variables:
+
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Variable} & \textbf{Purpose}\\
+\hline
+$P_c$ & The position of the cat on the circle\\
+$P_s$ & The position of the swan on the circle\\
+$d$ & The distance from the swan to the cat\\
+$s$ & The distance from the swan to the edge\\
+$\alpha$ & The angular distance between the swan's and the cat's forward vectors\\
+$r$ & The radius of the lake\\
+$V_s$ & Velocity of the swan\\
+$V_c$ & Velocity of the cat\\
+$\omega_c$ & Angular velocity of the cat\\
+$\omega$ & The cat's angular speed\\
+\hline
+\end{tabular}
+
+The time it takes for the swan to get straight to the shore is $\frac{r}{V_s}$, but the time it takes the cat with velocity for times that of the swan ($V_s = 4V_c$) is $\frac{r}{V_c}$. We can see wether the cat \emph{will} outpace the swan by looking at the individual times ($t = \frac{V}{S}$) it takes for animals to reach the same point on the edge. The distance the cat has to travel is the radius of the circle, but the distance for the swan is half the circle's circumference.
+
+\begin{equation}
+	\frac{\pi r}{V_c} < \frac{r}{V_s}
+\end{equation}
+Substitute the $V_c = 4V_s$.
+\begin{equation}
+	\frac{\pi r}{4V_s} < \frac{r}{V_s}
+\end{equation}
+Divide both sides by $\frac{r}{V_s}$.
+\begin{equation}
+	\frac{\pi}{4} < 1
+\end{equation}
+Multiply both sides by 4.
+\begin{equation}
+	\pi < 4
+\end{equation}
+
+
+
 \section{Conclusion}
 Glad I did it with \LaTeXe\cite{latex2e}, will continue using it.
-\end{multicols}
 
 \clearpage
 \bibliographystyle{plain}
