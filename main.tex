@@ -5,15 +5,18 @@
 \usepackage{witharrows}
 \usepackage{lipsum}
 \usepackage{layout}
+\usepackage{xcolor}
 \usepackage{blindtext}
 \usepackage{multicol}
 \usepackage{fancyhdr}
+\usepackage{indentfirst}
 \usepackage{hyperref}
 \usepackage{natbib}
 \usepackage{indentfirst}
 \usepackage{mwe}
 \usepackage{epigraph}
-\usepackage{parskip}
+\usepackage[skip=10pt plus1pt]{parskip}
+\WithArrowsOptions{displaystyle,tikz=blue}
 
 \begin{document}
 \begin{titlepage}
@@ -30,7 +33,7 @@
 	supervised by\par
 	Eskelinen Tanja
 	\vfill
-	{\large \today\par}
+	{\large \today, 843 words\par}
 \end{titlepage}
 
 \clearpage
@@ -48,8 +51,7 @@ I always found childish math problems the most engaging. The ones that you could
 
 There are several versions of the problem with different species chasing eachother around, but alas I couldn't find the work the problem first appeared in, so I am going to use my prefered variation. The premise and numerical values stay the same across interpretations.
 
-\newpage
-\emph{Imagine a swan in a middle of a perfectly circular unit lake. Standing on the edge is a hungry cat. The cat is after the swan and the swan's goal is to escape. The best route is flight, and yet it can only take off from land. The cat on land is 4 times faster than the swan on water. Can the mouse escape the cat and if yes, what trajectory does it need to follow?}
+\emph{Imagine a swan in a middle of a perfectly circular unit lake. Standing on the edge is a hungry cat. The cat is after the swan and the swan's goal is to escape. The best route is flight, and yet it can only take off from land. The cat on land is 4 times faster than the swan on water. Can the swan escape the cat and if yes, what trajectory does it need to follow?}
 
 We need to formalize the problem. It can be represented using the following variables:
 
@@ -57,43 +59,94 @@ We need to formalize the problem. It can be represented using the following vari
 \hline
 \textbf{Variable} & \textbf{Purpose}\\
 \hline
-$P_c$ & The position of the cat on the circle\\
-$P_s$ & The position of the swan on the circle\\
-$d$ & The distance from the swan to the cat\\
-$s$ & The distance from the swan to the edge\\
-$\alpha$ & The angular distance between the swan's and the cat's forward vectors\\
 $r$ & The radius of the lake\\
-$V_s$ & Velocity of the swan\\
-$V_c$ & Velocity of the cat\\
+$d$ & Distance of the swan from the origin\\
+$\alpha_c$ & The angle between the cat's direction from the origin and the X axis\\
+$\alpha_s$ & The angle between the swan's direction from the origin and the X axis\\
+$V_s$ & Linear velocity of the swan\\
+$V_c$ & Linear velocity of the cat\\
+$\omega_s$ & Angular velocity of the swan\\
 $\omega_c$ & Angular velocity of the cat\\
-$\omega$ & The cat's angular speed\\
+$\Delta \alpha$ & The angular distance between the swan's and the cat's forward vectors\\
+$d_e$ & The distance the swan needs to be away from the center to outrun the cat.\\
+$d_o$ & The distance from center within which the swan can move to any position.\\
+
 \hline
 \end{tabular}
+\vspace{12pt}
+\begin{center}
+	\begin{tikzpicture}[scale=2]
+		\draw (0,0) circle [radius=1];
+	\end{tikzpicture}
+\end{center}
 
-The time it takes for the swan to get straight to the shore is $\frac{r}{V_s}$, but the time it takes the cat with velocity for times that of the swan ($V_s = 4V_c$) is $\frac{r}{V_c}$. We can see wether the cat \emph{will} outpace the swan by looking at the individual times ($t = \frac{V}{S}$) it takes for animals to reach the same point on the edge. The distance the cat has to travel is the radius of the circle, but the distance for the swan is half the circle's circumference.
+\subsection{Proof Of Solvability}
 
-\begin{equation}
-	\frac{\pi r}{V_c} < \frac{r}{V_s}
-\end{equation}
-Substitute the $V_c = 4V_s$.
-\begin{equation}
-	\frac{\pi r}{4V_s} < \frac{r}{V_s}
-\end{equation}
-Divide both sides by $\frac{r}{V_s}$.
-\begin{equation}
-	\frac{\pi}{4} < 1
-\end{equation}
-Multiply both sides by 4.
-\begin{equation}
-	\pi < 4
-\end{equation}
+The swan will try and move to the point opposite of the initial cat's location. The distance the swan has to travel is the radius of the circle, but the distance for the cat is half the circle's circumference ($\frac{2\pi r}{2} = \pi r$). The time it takes the swan is $t_s = \frac{r}{V_s}$, but the time it takes the cat with velocity four times that of the swan ($V_c = 4V_s$) is $t_c = \frac{r}{V_c}$. We can see whether the cat outpace the swan by comparing their individual times it takes for animals to reach the same point on the edge. 
 
+\begin{center}
+$\begin{WithArrows}[jot=2ex]
+t_c &< t_s\\
+\frac{\pi r}{V_c} &< \frac{r}{V_s} \Arrow{Substitute $V_c = 4V_s$}\\
+\frac{\pi r}{4V_s} &< \frac{r}{V_s} \Arrow{Divide both sides by $\frac{r}{V_s}$ (assuming $V_s \neq 0$)}\\
+\frac{\pi}{4} &< 1 \Arrow{Multiply both sides by 4}\\
+\pi &< 4
+\end{WithArrows}$
+\end{center}
 
+We see that the just dashing to the edge won't work for the swan if it's in the middle, but we can imagine that if the swan is close enough to the edge and cat far enough from the closest point to the swan, it can actually outrun the cat. It is possible to find that distance $d_e$. How far from the edge and opposite the cat would we have to stand can be deduced if we compare the times taken to reach the edge. According to our previous calculations it takes cat $\frac{\pi r}{4 V_s}$ time units, so the swan has to take $\frac{d_e}{V_s}$ time units or less.
+
+\begin{center}
+$\begin{WithArrows}[jot=2ex]
+\frac{1 - d_e}{V_s} &< \frac{\pi r}{4 V_s} \Arrow{Multiply by $V_s$}\\
+1 - d_e &< \frac{\pi r}{4}
+\end{WithArrows}$
+\end{center}
+
+Now the question is whether it is even possible to get to that point. We can turn our attention to the angular velocities of the animals. If the distance of the swan from the center is $d_o$, the swan has the angular velocity of $\omega_s = \frac{V_s}{d_o}$ and the cat has angular velocity $\omega_c = \frac{4V_s}{r}$. Notice how the velocity of the cat is essentially constant, but the velocity of the swan is controlled by it's distance from the origin $d_o$. Based on this we can solve for the distance, at which the swan will be faster (in terms of it's angular velocity) than the cat.
+
+\begin{center}
+$\begin{WithArrows}[jot=2ex]
+\frac{V_s}{d_o} &> \frac{4V_s}{r} \Arrow{Invert the fractions}\\
+\frac{d_o}{V_s} &< \frac{r}{4V_s} \Arrow{Divide by $\frac{r}{V_s}$}\\
+\frac{d_o}{r} &< \frac{1}{4} \Arrow{Multiply by $r$}\\
+d_o &< \frac{r}{4}
+\end{WithArrows}$
+\end{center}
+
+Based on distances $d_o$ and $d_e$ we can conclude that the swan can move to any position as long as it's opposite the cat, less than $d_e$ away from the edge and more than $d_o$ away from the origin. This forms an annulus $A$. Moving to any specific location on $A$ may require circling around the origin several times at different distances. Since we can position ourselves anywhere in this annulus it is indeed possible to swim to the shore without being caught by the cat! As a matter of fact, this gives us a infinite amount of possible trajectories, since for each successfull trajectory we can make one more lap around $A$.
+
+\begin{center}
+	\begin{tikzpicture}[scale=2]
+		\draw (0,0) circle [radius=1];
+	\end{tikzpicture}
+\end{center}
+
+\subsection{Describing Motion}
+Behaviours of both animals can be assumed to be maximizing some function. The cat aims to be closest to the swan, which requires it to be on the closest point on the circle such that were the swan go towards it the cat would catch it. Since cat doesn't have direct control over the distance between it and the prey, the cat attempts to minimize $\Delta \alpha = |\alpha_s - \alpha_c|$. The cat's velocity is linear, so assuming the swan is trying to run away in $+\alpha_s$, the cat would be moving at speed $\omega_c$ in the $+\alpha_c$ direction. If the swan would be swimming in $-\alpha_s$, the cat would move with the same direction. It is not advantegous for the swan or cat to stand still, since then their opponent would be able to gain more distance, so assume both animals always moving at all times.
+
+We can restate the problem my assuming that the cat stays static and instead the lake is rotated. This allows us to describe the motion of the swan only in terms of the swan itself. In the scenario described above the swan tries to maximize the angle $\Delta \alpha$ between itself and the cat while also minimizing it's own distance to the edge.
+
+In this case the swan is an agent with it's own utility function, which identifies how much it prioritises moving to the shore over gaining angular distance.
+
+\begin{center}
+	\color{blue}
+	So the future plan is as follows:
+	\begin{enumerate}
+		\item Express the swan's position as two multivariate functions maximizing distance from the cat on shore and minimizing the distance from said shore. Maximizing two functions at the same time should be done using a utility function.
+		\item Maximize the utility function using (presumably) Lagrange multipliers.
+		\item Test it using some software
+		\item 50 pages worth of reflection.
+		\item ???
+		\item Profit.
+	\end{enumerate}
+\end{center}
+
+% Constraints: if I get to the shore right now, the cat will take longer 
 
 \section{Conclusion}
 Glad I did it with \LaTeXe\cite{latex2e}, will continue using it.
 
-\clearpage
 \bibliographystyle{plain}
 \bibliography{sources}
 \end{document}
