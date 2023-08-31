@@ -37,7 +37,7 @@
 	\vspace{2cm}
 	\vfill
 	\vfill
-	{\large \today, a word count\par}
+	{\large \today, 1818 words\par}
 \end{titlepage}
 
 \clearpage
@@ -57,39 +57,16 @@ The research question of this Mathematics Extended Essay is the following proble
 
 In investigating this question I first ensured that it has a solution using simple direct proofs, then expressed the variables in terms of complex numbers to ease visualising it and used my knowledge I've collected during the DP years. At any point reading this you may refer to the table of all variables in the Appendix.
 
-\subsection{Notation Notice}
-
-\begin{multicols*}{2}
-	$$i = \sqrtsign{-1}$$
-	$$\arg (a + i b) = \arctan \Bigl(\frac{b}{a}\Bigr)$$
-	$$|a + ib| = \sqrt{a^2  + b^2}$$
-	\begin{equation*}
-		H(x) = \left\{ \begin{aligned} 
-				1, x \geq 0\\
-				0, x < 0\\
-				\end{aligned} \right.
-	\end{equation*}
-	\begin{equation*}
-		\text{sgn}_+(x) = 2H(x) - 1 = \left\{ \begin{aligned} 
-			1, x \geq 0 \\
-			-1,x < 0 \\
-			\end{aligned} \right. = \left\{ \begin{aligned} 
-				1, x = 0 \\
-				\frac{x}{|x|}, x \neq 0 \\
-				\end{aligned} \right.
-	\end{equation*}
-\end{multicols*}
-
 \section{Solution}
 There are several versions of the problem with different species chasing eachother around, but alas I could not trace down the source. Versions of this problem can be found under the names of "A Lady And A Monster"\cite{ladyandmonster}, "Game Of Cat And Mouse"\cite{Catandmouse} and others. The general premise and numerical values stay the same across interpretations. 
 
 My primary reason for choosing to focus on this specific problem came from my strong desire to find an analytical solution to it. Eversince I saw it in a YouTube video\cite{Catandmouse}, I was excited to have it on my radar, the Extended Essay offered me a window of opportunity. I also enjoy spending my free time pondering problems like that, although they are usually of computer science ilk. This problem turned out to be especially difficult, even though most of the steps and theorems can be outlined on a paper towel, all require deep insights into how the problem works.
 
-We will assume both animals to be acting \textit{nearly optimally}, so are choosing whichever option gives them the best result in the moment, or when two or more solutions are equally optimal we will make sure to define one of them to always pick. In Cat's case it is trying to be closer to the Swan, since its "win condition" is essentially having the same position as the Swan on the lake border. I will conjecture that the can will always pick the shortest path to any point $p$, in hopes that this decision is obvious.
+We will assume both animals to be acting \textit{nearly optimally}, so are choosing whichever option gives them the best result in the moment, or when two or more solutions are equally optimal we will make sure to define one of them to always pick. In Cat's case it is trying to be closer to the Swan, since its "win condition" is essentially having the same position as the Swan on the lake border. I will conjecture that the Cat will always pick the shortest path to any point $p$, in hopes that this decision is obvious.
 
-\textbf{Theorem.}: The best way for the Cat to act is to move closer to the Swan.
+\textbf{Theorem}: The best way for the Cat to act is to move closer to the Swan.
 
-\textbf{Proof.}: Assume the Swan has velocity $V$ and if it was to keep that velocity unchanged it would reach the lake shore at point $p$. Assume the cat is moving towards some other point $p'$. If $p$ does not belong to an arc $C$ on the lake spanning from the Cat's current position to point $p$, then the Swan is guaranteed to win. In case that $p \notin C$, the Swan can direct it velocity at $-V$, which will correspond to a point $-p$ that is not on the arc $C$. $\blacksquare$
+\textbf{Proof}: Assume the Swan has velocity $V$ and if it was to keep that velocity unchanged it would reach the lake shore at point $p$. Assume the cat is moving towards some other point $p'$, such that $p' \neq p$. If $p$ does not belong to an arc $C$ on the lake spanning from the Cat's current position to point $p'$, then the Swan is guaranteed to win. In case that $p \in C$, the Swan can direct it velocity at $-V$, which will correspond to a point $-p$ that is not on the arc $C$. $\blacksquare$
 
 The same logic, sadly, does not express the variety of the Swan's potential strategies, since it's goal is not to actually get away from the Cat, but to reach the shore without being caught. One of the first things you can do when approaching such question is look at whether it even is solvable.
 
@@ -103,21 +80,21 @@ The same logic, sadly, does not express the variety of the Swan's potential stra
 
 The simplest strategy for the Swan is to swim towards the shore in a straight line without ever changing direction, it is the shortest path after all. We will denote the velocities of the Swan and the Cat as $V$ and $V'$ respectively. The time $t$ it takes the Swan to reach the shore will be $\frac{r}{V}$. In Cat's case it entirely depends on the point, for example to reach the point opposite to it's current is going to take $t' = \frac{\pi r}{V'} = \frac{\pi r}{4V}$. Notice that even if the Swan swims directly away from the Cat's initial position it will be caught:
 
-\textbf{Theorem.} The Cat will outrun the Swan if the Swan swims directly opposite to the Cat's initial position.
+\textbf{Theorem:} The Cat will outrun the Swan if the Swan swims directly opposite to the Cat's initial position.
 
-\textbf{Proof.} Assume 
+\textbf{Proof:} Assume 
 \begin{center}
 $\begin{WithArrows}
 \text{t} &< \text{t'} \Arrow{Substitute}\\
 \frac{\pi r}{V'} &< \frac{r}{V} \Arrow{$V' = 4V$}\\
-\frac{\pi r}{4V} &< \frac{r}{V} \Arrow{$\square \times \frac{V}{r}$}\\
+\frac{\pi r}{4V} &< \frac{r}{V} \Arrow{$\square \cdot \frac{V}{r}$}\\
 \frac{\pi}{4} &< 1 \hspace{10pt} \blacksquare
 \end{WithArrows}$
 \end{center}
 
-We see that the just dashing to the edge won't work for the Swan if it's in the middle, but we can image alternatives conditions. If the Swan ws closer to the edge, surely it could be faster than the Cat?
+We see that the just dashing to the edge won't work for the Swan if it's in the middle, but we can imagine alternative conditions. If the Swan is closer to the edge, surely it could be faster than the Cat?
 
-Assume the Swan is such distance $d$ away from edge and directly opposite the Cat, so that it can safely reach the edge, what are the possible values of $d$? That would mean that the time it takes the Swan to reach the edge is shorter, than the time it takes the Cat to reach the same point. It is of course depends on the position of the Cat, but let it be exactly opposite the Swan. It can be expressed as $\frac{d}{V} < \frac{\pi r}{4V} \Leftrightarrow  d < \frac{\pi}{4}r$.
+Assume the Swan is such distance $d$ away from edge and directly opposite the Cat, so that it can safely reach the edge. That would mean that the time it takes the Swan to reach the edge is shorter, than the time it takes the Cat to reach the same point. It of course depends on the position of the Cat, but let it be exactly opposite the Swan. It can be expressed as $\frac{d}{V} < \frac{\pi r}{4V} \Leftrightarrow  d < \frac{\pi}{4}r$.
 
 \subsection{The Freedom Circle}
 
@@ -126,10 +103,10 @@ Now the question is whether it is even possible to get to that point. We can tur
 \begin{center}
 $\begin{WithArrows}[jot=2ex]
 \frac{V}{D} &> \frac{4V}{r} \Arrow{$\square^{-1}$}\\
-\frac{D}{V} &< \frac{r}{4V} \Arrow{$\square \times {V}$}\\
+\frac{D}{V} &< \frac{r}{4V} \Arrow{$\square \cdot {V}$}\\
 D &< \frac{r}{4} \Arrow{$D = r - d$}\\
 r - d &< \frac{r}{4} \Arrow{$\square - r$}\\
-- d &< \frac{r}{4} - r  \Arrow{$\square \times -1$}\\
+- d &< \frac{r}{4} - r  \Arrow{$\square \cdot (-1)$}\\
 d &> r - \frac{r}{4}
 \end{WithArrows}$
 \end{center}
@@ -144,7 +121,7 @@ There exists an infinite amount of viable trajectories, since for every possible
 
 Next we may look at getting to the edge of the "safety" annulus. For a successful escape the Swan has to exit it at such point, that it's directly opposite the Cat. Over an infinitesimal amount of time $\Delta t$ the Swan can travel a total distance of $s = V \Delta t$. Assume the Swan is somewhere inside the "freedom" circle, then the Cat moves at $\omega' = \pm \frac{4V}{r}$. The Cat can move either clockwise or counterclockwise, since at all times there are two paths to its desired point and the Cat is always going to choose the shortest (except for the case when cat is directly opposite, since then two paths have equal lengths, when that happens we will assume the cat to move counterclockwise $\omega' > 0$).
 
-In this case in order to compensate for the Cat's movement (remain opposite to it) the Swan has to move the same angle in \textit{the same direction around the clock, but opposite in terms of coordinates}. Since the magnitude of the velocity vector should remain $V$, we can express it as two vectors: moving away from the center to exit the "freedom" circle ($V_\alpha$) and compensation for Cat's movement ($V_{\omega'}$). If compensation is $V_{\omega'} = \omega' \times D$, we can solve for the away velocity ($V_\alpha$) as follows:
+In this case in order to compensate for the Cat's movement (remain opposite to it) the Swan has to move the same angle in \textit{the same direction around the clock, but opposite in terms of coordinates}. Since the magnitude of the velocity vector should remain $V$, we can express it as two vectors: moving away from the center to exit the "freedom" circle ($V_\alpha$) and compensation for Cat's movement ($V_{\omega'}$). If compensation is $V_{\omega'} = \omega' \cdot D$, we can solve for the away velocity ($V_\alpha$) as follows:
 
 \begin{center}
 $\begin{WithArrows}[jot=2ex]
@@ -169,17 +146,22 @@ V_\alpha &= \sqrt{V^2 - (\omega'D)^ 2}
 	\end{tikzpicture}
 \end{center}
 
-\subsection{Lake Shapes \& Polar Curves}
-
-Since the case of a circular lake is solved we may generalize the problem to a broader case, specifically the case of any lake shape.
-
 \subsection{Describing Position}
 
-When describing the motion of objects in a 2D plane like in our case it only makes sense to use vectors, however, since we often deal with angles an rotations a polar complex coordinate system is a lot more appropriate. We will define $i$ such that $i = \sqrtsign{-1}$ and assume 1 and $i$ to be the vector bases. The set $\mathbb{C}$ is isomorphic to $\mathbb{R}^2$, so the two are interchangable in this context. %TODO: proof?% 
+When describing the motion of objects in a 2D plane like in our case it only makes sense to use vectors, however, since we often deal with angles an rotations a polar complex coordinate system is a lot more appropriate. We will define $i$ such that $i = \sqrtsign{-1}$ and assume 1 and $i$ to be the vector bases for $\{z \in \mathbb{C}: z = 1x + iy\}$. The \textit{set} $\mathbb{C}$ is isomorphic to $\mathbb{R}^2$, so the two are interchangable in this context. %TODO: proof?% 
 
-We can introduce a polar coordinate system to get the velocities for the Swan or the Cat as complex numbers $\vec{V}$ and $\vec{V}'$ respectively. Since the Cat always moves tangentially, let $\theta = \arg P'$, the angle between the Cat's position and the x-axis, then its velocity will always be directed at angle $\theta \pm \pi$ relative to the x-axis (tangentially to the circle, counterclockwise or clockwise depending on the $\pm \pi$).
+We can introduce a polar coordinate system to get the velocities for the Swan or the Cat as complex numbers $\vec{V}$ and $\vec{V}'$ respectively. Since the Cat always moves tangentially, let $\theta$, the angle between the Cat's position and the x-axis, then its velocity will always be directed at angle $\theta \pm \pi$ relative to the x-axis (tangentially to the circle, counterclockwise or clockwise depending on the $\pm \pi$).
 
-To decide whether to move clockwise or counterclockwise the Cat can use the cross product of its own and the Swan's positions $P \times P'$, specifically the imaginary component. Due to the properties of the cross product it will always yield a vector perpendicular to the initial two, but since we are restricted to be inside a complex plane, the only vector component is imaginary. If we think of the complex numbers as vectors with bases $1$ and $i$ the cross product is just the determinant of a joined matrix of vectors: $P \times P' = (a + ib) \times (c + id) = \det \bigl[ \begin{smallmatrix} 
+To get the angle we can imagine the complex number to be describing a line, since the real part is usually considered the x coordinate and the imaginary is the y, the slope of the line going through that point is $\frac{y}{x}$, so for $1x + iy$ it is $\tan \theta = \frac{y}{x}$, so to get the angle we apply $\arctan$ to both sides, that yields $\theta = \arctan{\frac{y}{x}}$, the definition of the \textit{argument} or the \textit{phase} of a complex number denoted $\arg z$. There is an issue with purely imaginary numbers (when $\Re (z) = 0$), since in that case $\arg$ would be undefined. To avoid this issue we may extend this function to the following: $$
+\arg (z) = \left\{ 
+		\begin{aligned}
+			\pi						,\hspace{4pt}&  z = 0 + |z|i\\
+			-\pi					,\hspace{4pt}&  z = 0 - |z|i\\
+			\arctan {\frac{\Im (z)}{\Re (z)}}	,\hspace{4pt}&	\text{otherwise}\\
+		\end{aligned}
+	\right.$$
+
+To decide whether to move clockwise or counterclockwise the Cat can use the cross product of its own and the Swan's positions $P \times P'$, specifically the imaginary component. Due to the properties of the cross product it will always yield a vector perpendicular to the initial two, but since we are restricted to be inside a complex plane, the only vector component is imaginary. Given that complex numbers are vectors with bases $1$ and $i$, the cross product is just the determinant of a joined matrix of vectors: $P \times P' = (a + ib) \times (c + id) = \det \bigl[ \begin{smallmatrix} 
 	a & c\\
 	ib & id 
   \end{smallmatrix} \bigr] = iad - ibc = i(ad - bc)$.
@@ -190,25 +172,43 @@ From that we see that the only vector component is, indeed, imaginary, so we def
 	
 \end{tabular*}
 
-$$\begin{WithArrows}[jot=1.5ex]
-\vec{V}' &= 4 \frac{(\cos(\theta) + i \sin(\theta)) \times (p_\times)}{|(\cos(\theta) + i \sin(\theta)) \times (p_\times)|} \Arrow{$|ab| = |a| \times |b|$}\\
-\vec{V}' &= 4 \frac{(p_\times) \times (\cos(\theta) + i \sin(\theta))}{|(p_\times)| \times|(\cos(\theta) + i \sin(\theta))|} \Arrow{$|\cos(\theta) + i \sin(\theta)| = \cos^2 + \sin^2 = 1$}\\
-\vec{V}' &= 4 \frac{p_\times}{|p_\times|}\frac{\cos(\theta) + i \sin(\theta)}{1} \Arrow[tikz={text width=5.3cm}]{By definition of $\text{sgn}_+$}\\
-\vec{V}' &= 4 \times \text{ sgn}_+ (p_\times) \times (\cos(\theta) + i \sin(\theta))
-\end{WithArrows}$$
+One of the problems that may also arise is that the cross product of two collinear\cite{vectorterminology} vectors is $0$, in our case that would happen when the Swan is either moving directly at the Cat or directly away. However, since we defined the Swan's strategy to require always moving in the opposite direction, we can omit the case of the vectors being collinear and parallel\cite{vectorterminology} and only focues the collinear and antiparallel\cite{vectorterminology} case.
 
-The last transformation is not exactly sound, but since we defined the Cat to be moving counterclockwise in an ambigous situation using sgn$_+(x)$ instead of sgn$(x)$ is valid. If we were to use plain sgn$(x)$, the Cat would get stuck when $p_\times = 0$, so when the Swan is opposite.
+Since scaling the cross product would also influence the magnitude of the velocity vector we will use the signum function. $$\text{sgn}(x) = \left\{ 
+	\begin{aligned}
+		-1&, x < 0\\
+		0&, x = 0\\
+		1&, x > 0
+	\end{aligned}
+\right.$$
 
-The Swan on the other hand will have to decide on the strategy depending on the distance $D$ from the center. When dashing away all of it's velocity will be directed away from the center, exactly where the magnitude of it's position $P$ will be directed.
+The main issue with this classic definition is that it is $0$ at $x = 0$, in our problem domain this would correspond to the Cat getting stuck when it is opposite the Swan, for that purpose we will define another function, to insist going counterclockwise in an ambigous case:$$\text{sgn}_+(x) = \left\{ 
+	\begin{aligned}
+		-1&, x < 0\\
+		1&, x \geq 0
+	\end{aligned}
+\right.$$
+
+Given all of the above, the final velocity vector of the Cat is the following: $$
+\vec{V}' = 4 \cdot \text{ sgn}_+ (p_\times) \cdot (\cos(\theta) + i \sin(\theta))
+$$
+
+We had to use a clever $\text{sgn}$ function to describe the direction, however, I CONJECTURE THAT THE SWAN ONLY MOVES IN ONE DIRECTION AND THAT DIRECTION IS COUNTERCLOCKWISE, END OF STORY. There is no reason for the Cat to change direction ever.
+
+The Swan on the other hand will have to decide on the strategy depending on the distance $D$ from the center. When dashing away all of it's velocity will be directed away from the center, exactly where the magnitude of it's position $P$ is directed.
 
 \begin{equation*}
 	\vec{V} = \left\{ 
 		\begin{aligned}
-			\frac{\vec{V}'}{4} \times (i V_\alpha  - \omega' D) \\
+			\frac{\vec{V}'}{4} \cdot (i V_\alpha  - \omega' D) \\
 			\frac{P}{|P|}, 
 		\end{aligned}
 	\right.
 \end{equation*}
+
+\subsection{Lake Shapes \& Polar Curves}
+
+Since the case of a circular lake is solved we may generalize the problem to a broader case, specifically the case of any lake shape.
 
 \section{Conclusion}
 Glad I did it with \LaTeXe\cite{latex2e}, will continue using it.
